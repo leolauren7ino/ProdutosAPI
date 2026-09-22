@@ -19,7 +19,10 @@ namespace ProdutosAPI.Tests
 
             // Assert
             Assert.True(estoqueInsuficiente);
+            
         }
+
+
 
         [Fact]
         public void NaoDeveIndicarEstoqueInsuficienteQuandoQuantidadeMenorOuIgualAoEstoqu()
