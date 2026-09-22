@@ -22,27 +22,7 @@ API REST em **ASP.NET Core** para gestão de produtos, categorias, clientes e pe
 
 ```mermaid
 erDiagram
-    CATEGORIA ||--o{ PRODUTO : possui
-    CLIENTE ||--o{ ENDERECO : possui
-    CLIENTE ||--o{ PEDIDO : realiza
-    PEDIDO ||--o{ ITEM_PEDIDO : contém
-    PRODUTO ||--o{ ITEM_PEDIDO : está_em
-
-    CATEGORIA {
-        int Id
-        string Nome
-    }
-    PRODUTO {
-        int Id
-        string Nome
-        decimal Preco
-        int Estoque
-        int CategoriaId
-    }
-    CLIENTE {
-        int Id
-        string Nome
-        string Email
-        string Telefone
-    }
-    ENDERECO {
+    CATEGORIA ||--o{ PRODUTO : has
+    CLIENTE ||--o{ ENDERECO : has
+    CLIENTE ||--o{ PEDIDO : places
+    PEDIDO
