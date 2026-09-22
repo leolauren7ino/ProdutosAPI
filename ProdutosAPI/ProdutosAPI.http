@@ -1,0 +1,132 @@
+@ProdutosAPI_HostAddress = http://localhost:5048
+
+GET {{ProdutosAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+DELETE  https://localhost:7264/api/Produtos/3
+Content-Type: application/json
+
+###
+
+PUT  https://localhost:7264/api/Produtos/4
+Content-Type: application/json
+{
+  "nome": "Notebook Lenovo",
+  "preco": 4000.00,
+  "estoque": 15
+}
+
+###
+
+POST https://localhost:7264/api/Categorias
+
+Content-Type: application/json
+{
+  "nome": "Eletrônicos"
+}
+
+###
+POST https://localhost:7264/api/Produtos
+Content-Type: application/json
+
+{
+  "nome": "Mouse",
+  "preco": 250.00,
+  "estoque": 30,
+  "categoriaId": 2
+}
+
+###
+POST https://localhost:7264/api/Clientes
+Content-Type: application/json
+
+{
+  "nome": "João Silva",
+  "email": "joao@email.com",
+  "telefone": "11999999999"
+}
+###
+GET https://localhost:7264/api/Produtos
+
+###
+POST https://localhost:7264/api/clientes/2/enderecos
+Content-Type: application/json
+
+{
+  "rua": "Rua do Centro",
+  "numero": 321,
+  "bairro": "Vila Mathilde"
+}
+
+
+###
+POST https://localhost:7264/api/Pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 1,
+  "data": "2026-09-17",
+  "itens": [
+    { "produtoId": 1, "quantidade": 2 },
+    { "produtoId": 2, "quantidade": 1 }
+  ]
+}
+
+###
+
+  POST https://localhost:7264/api/Pedidos
+Content-Type: application/json
+
+{
+  "clienteId": 2,
+  "data": "2026-09-21",
+  "itens": [
+    { "produtoId": 1, "quantidade": 4 }
+  ]
+}
+
+###
+PUT https://localhost:7264/api/pedidos/1/itens/2
+Content-Type: application/json
+
+{
+  "quantidade": 5
+}
+
+###
+
+DELETE https://localhost:7264/api/Categorias/2
+
+###
+GET https://localhost:7264/api/Produtos
+
+###
+POST https://localhost:7264/api/Auth/registrar
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "senha": "senha123"
+}
+
+###
+POST https://localhost:7264/api/Auth/login
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "senha": "senha123"
+}
+
+###
+POST https://localhost:7264/api/Produtos
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJleHAiOjE3OTAwODcwNTEsImlzcyI6IlByb2R1dG9zQVBJIiwiYXVkIjoiUHJvZHV0b3NBUEkifQ.DF8d9jZ73WiVPlcoiU0OaWDTypjLO7yaViX5LjpNdIE
+
+{
+  "nome": "Head-phone",
+  "preco": 200.00,
+  "estoque": 25,
+  "categoriaId": 1
+}
