@@ -107,24 +107,37 @@ erDiagram
 
 **Autenticação com JWT.** Senhas nunca são armazenadas em texto puro (hash via BCrypt). O token expira em 2 horas e carrega o login e o Id do usuário como *claims*.
 
+**Segredos fora do repositório.** A chave de assinatura do JWT (`Jwt:Key`) não é versionada: em desenvolvimento ela vem do `dotnet user-secrets`, e em outros ambientes da variável de ambiente `Jwt__Key`. Se a chave não estiver configurada, a aplicação falha na inicialização com uma mensagem clara, em vez de quebrar depois com `NullReferenceException`.
+
 ---
 
 ## Como rodar o projeto
 
 1. Clone o repositório e abra a solução no Visual Studio.
-2. Ajuste a connection string em `appsettings.json` (usa SQL Server LocalDB por padrão).
-3. No **Package Manager Console**, rode:
+2. Configure a chave do JWT (ela **não** fica no repositório). Na pasta do projeto `ProdutosAPI`:
+```powershell
+   dotnet user-secrets set "Jwt:Key" "<mínimo de 32 caracteres aleatórios>"
+```
+   Em outros ambientes, use a variável de ambiente `Jwt__Key`.
+3. Ajuste a connection string em `appsettings.json` (usa SQL Server LocalDB por padrão).
+4. No **Package Manager Console**, rode:
 ```powershell
    Update-Database
 ```
-4. Rode o projeto (F5). A API sobe em `https://localhost:7264` (a porta pode variar).
-5. Use o arquivo `ProdutosAPI.http` para testar os endpoints diretamente no Visual Studio.
+5. Rode o projeto (F5 ou `dotnet run`). A porta aparece no console (por exemplo, `http://localhost:5048`) e pode variar.
+6. Use o arquivo `ProdutosAPI.http` para testar os endpoints diretamente no Visual Studio.
 
 ### Fluxo de autenticação para testar rotas protegidas
 
+Nenhum usuário vem pré-cadastrado. Crie um e depois faça login:
+
+```http
+POST /api/Auth/registrar
+{ "login": "<usuario>", "senha": "<senha>" }
+```
 ```http
 POST /api/Auth/login
-{ "login": "admin", "senha": "senha123" }
+{ "login": "<usuario>", "senha": "<senha>" }
 ```
 Copie o `token` retornado e envie nas próximas requisições protegidas:
 ```http
