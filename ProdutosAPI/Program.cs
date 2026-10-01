@@ -7,6 +7,10 @@ using ProdutosAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+   var jwtKey = builder.Configuration["Jwt:Key"]
+       ?? throw new InvalidOperationException(
+           "Jwt:Key is not configured. Use 'dotnet user-secrets' or the Jwt__Key environment variable.");
+
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -44,7 +48,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                Encoding.UTF8.GetBytes(jwtKey))
         };
     });
 
